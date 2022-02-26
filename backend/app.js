@@ -10,6 +10,7 @@ const app = express();
 const server = http.createServer(app);
 
 const userRoutes = require('./routes/user');
+const planRoutes = require('./routes/plan');
 
 const accessLogStream = fs.createWriteStream(
     path.join(__dirname, 'logs', 'access.log'),
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/user', userRoutes);
+app.use('/plan', planRoutes);
 
 mongoose.connect(
     `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mplan_db:27017?authSource=admin`,
