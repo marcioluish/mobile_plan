@@ -1,0 +1,5 @@
+docker-compose.yaml
+.gitignore
+.git
+env/
+.prettierrc

@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  mplan_backend:
+    container_name: mplan
+    image: mplan
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      # named volume
+      - backend_logs:/app/logs
+      # bind volume
+      - ./backend:/app
+      # anonymous volume
+      - /app/node_modules
+    env_file:
+      - ./env/backend.env
+    ports:
+      - 8000:8000
+      - 9229:9229
+    depends_on:
+      - mplan_db
+    networks:
+      - mplan
+
+  mplan_db:
+    container_name: mplan_db
+    image: "mongo:5.0.0"
+    volumes:
+      - data:/data/db
+    env_file:
+      - ./env/mongo.env
+    networks:
+      - mplan
+  
+
+volumes:
+  backend_logs:
+  data:
+
+networks:
+  mplan:
