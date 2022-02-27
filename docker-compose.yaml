@@ -2,13 +2,13 @@ version: "3.8"
 
 services:
   mplan_backend:
-    container_name: mplan
-    image: mplan
+    container_name: mplan_backend
+    image: mplan_backend
     build:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
-      # named volume
+      # bind logs
       - backend_logs:/app/logs
       # bind volume
       - ./backend:/app
@@ -33,10 +33,31 @@ services:
       - ./env/mongo.env
     networks:
       - mplan
+
+  mplan_frontend:
+    container_name: mplan_frontend
+    image: mplan_frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      # bind logs
+      - frontend_logs:/app/logs
+      # bind volume
+      - ./frontend:/app
+      # anonymous mount
+      - /app/node_modules
+    env_file:
+      - ./env/frontend.env
+    ports:
+      - 3000:3000
+    networks:
+      - mplan
   
 
 volumes:
   backend_logs:
+  frontend_logs:
   data:
 
 networks:
