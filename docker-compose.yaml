@@ -15,7 +15,7 @@ services:
       # anonymous volume
       - /app/node_modules
     env_file:
-      - ./env/backend.env
+      - ./env/backend.env      
     ports:
       - 8000:8000
       - 9229:9229
@@ -29,6 +29,7 @@ services:
     image: "mongo:5.0.0"
     volumes:
       - data:/data/db
+      - ./mongo/mongo-init-plans.js:/docker-entrypoint-initdb.d/mongo-init-plans.js:ro
     env_file:
       - ./env/mongo.env
     networks:
