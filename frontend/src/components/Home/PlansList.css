@@ -1,0 +1,47 @@
+.plans-list {
+    width: 40%;
+    padding: 3rem;
+    margin: 2rem auto;
+    list-style: none;
+    padding: 0;
+}
+
+.plan-price {
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.plan-spec {
+    margin-top: 0.25rem;
+}
+
+.plan-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin: 2rem auto;
+    background-color: rgba(235, 232, 232, 0.815);
+}
+
+.plan h2 {
+    color: black;
+    flex: 1;
+    font-size: 1.8rem;
+    font-style: bold;
+}
+
+.plan-button {
+    display: flex;
+    font: inherit;
+    background: #dd0db0;
+    border: 1px solid #dd0db0;
+    padding: 0.5rem 1.5rem;
+    color: white;
+    font-style: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26);
+    border-radius: 20px;
+}
