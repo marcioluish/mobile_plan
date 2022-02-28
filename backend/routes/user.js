@@ -7,6 +7,7 @@ const User = require('../models/user');
 
 router.post('/signup', async (req, res, next) => {
     const username = req.body.username;
+    const name = req.body.name;
     const password = req.body.password;
     let planId = req.body.planId;
 
@@ -20,6 +21,12 @@ router.post('/signup', async (req, res, next) => {
     if (!password || password.trim().length === 0) {
         console.log('Invalid INPUT - Password');
         return res.status(400).json({ message: 'Invalid password.' });
+    }
+
+    // Check for empty name field
+    if (!name || name.trim().length === 0) {
+        console.log('Invalid INPUT - Name');
+        return res.status(400).json({ message: 'Invalid Name.' });
     }
 
     User.findOne({ username: username })
@@ -37,6 +44,7 @@ router.post('/signup', async (req, res, next) => {
                 }
                 const user = new User({
                     username: username,
+                    name: name,
                     password: hashedPassword,
                     planId: planId,
                 });
@@ -47,6 +55,7 @@ router.post('/signup', async (req, res, next) => {
                         message: 'User Created!',
                         user: {
                             id: user.id,
+                            name: name,
                             username: username,
                             planId: planId,
                         },
@@ -99,6 +108,7 @@ router.post('/login', async (req, res, next) => {
                             user: {
                                 id: userDoc.id,
                                 username: username,
+                                name: userDoc.name,
                                 planId: userDoc.planId,
                             },
                         });
@@ -144,6 +154,7 @@ router.post('/:userId', async (req, res, next) => {
                     user: {
                         id: userId,
                         username: userDoc.username,
+                        name: userDoc.name,
                         planId: planId,
                     },
                 });

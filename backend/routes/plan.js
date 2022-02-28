@@ -98,4 +98,36 @@ router.post('/delete-plan/:planId', async (req, res, next) => {
         });
 });
 
+router.get('/:planId', async (req, res, next) => {
+    const planId = req.params.planId;
+
+    // Check for empty plan ID field
+    if (!planId || planId.trim().length === 0) {
+        console.log('Invalid INPUT - PlanID');
+        return res.status(400).json({ message: 'Invalid Plan ID.' });
+    }
+
+    Plan.findOne({ id: planId })
+        .then((planDoc) => {
+            if (!planDoc) {
+                return res.status(400).json({ message: 'Plan not Found.' });
+            }
+
+            return res.status(201).json({
+                message: 'Plan Found!',
+                plan: {
+                    id: planDoc.id,
+                    name: planDoc.name,
+                    price: planDoc.price,
+                    dataLimit: planDoc.dataLimit,
+                    callLimit: planDoc.callLimit,
+                },
+            });
+        })
+        .catch((err) => {
+            console.log('Failed retrieving plan.');
+            return res.status(400).json({ message: err });
+        });
+});
+
 module.exports = router;
