@@ -245,3 +245,7 @@ $ git clone https://github.com/marcioluish/mobile_plan.git
 ```sh
 $ docker-compose up --build
 ```
+
+# **Postman Collection**
+
+[mobile_plan.postman_collection.json.zip](https://github.com/marcioluish/mobile_plan/files/8153192/mobile_plan.postman_collection.json.zip)
